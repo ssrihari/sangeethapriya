@@ -13,7 +13,7 @@ class SangeethapriyaSearcher
 
   def results
     @results ||= document.css("#searchresults li").inject([]) do |array, result|
-      array << {album: result.text, track: result.css("a").text}
+      array << {track: result.text, album: result.css("a").text}
     end
   end
 end
