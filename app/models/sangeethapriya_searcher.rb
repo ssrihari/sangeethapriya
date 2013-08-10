@@ -13,7 +13,25 @@ class SangeethapriyaSearcher
 
   def results
     @results ||= document.css("#searchresults li").inject([]) do |array, result|
-      array << {track: result.text, album: result.css("a").text}
+      array << { track: track(result), album: album(result), link: link(result) }
     end
+  end
+
+  def track(result)
+    result.text
+  end
+
+  def album(result)
+    result.css("a").text
+  end
+
+  def link(result)
+    folder_link = result.css("a").attr("href").value()
+    hostname = "www.sangeethapriya.org"
+    folder_link.gsub!("http://#{hostname}/","")
+    filename = track(result).gsub(/mp3.+/, "mp3")
+    action = "http://#{hostname}/fstream.php\?"
+    prefix = "file\=/data/#{hostname}/public_html/"
+    "#{action}#{prefix}#{folder_link}/#{filename}"
   end
 end
