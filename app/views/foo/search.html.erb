@@ -1,5 +1,7 @@
 <form class="search-form" method="post" action="/search">
-  <label for="raga">Raga:</label> <input type="text" name="raga" />
+  <label for="raga">Raga:</label>
+  <input type="text" id="raga-input" name="raga" />
+  <%= submit_tag %>
 </form>
 
 <p class="results-count"><%= @results.count %> Results found for <%= params[:raga] %></p>
@@ -18,3 +20,9 @@
     <% end %>
   </tbody>
 </table>
+
+<% content_for :javascript_ready do %>
+  $("#raga-input").autocomplete({
+    source: <%= (@ragas["melakartas"] + @ragas["janyas"]).to_json.html_safe %>
+  });
+<% end %>

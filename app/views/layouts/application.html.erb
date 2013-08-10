@@ -9,6 +9,11 @@
 <body>
 
 <%= yield %>
+<script type="text/javascript">
+  $(function () {
+    <%= yield :javascript_ready %>
+  });
+</script>
 
 </body>
 </html>
