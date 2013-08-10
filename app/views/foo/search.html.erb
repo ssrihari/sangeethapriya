@@ -1,8 +1,11 @@
+<%= jwplayer_assets %>
 <form class="search-form" method="post" action="/search">
   <label for="raga">Raga:</label>
   <input type="text" id="raga-input" name="raga" />
   <%= submit_tag %>
 </form>
+
+<%= jwplayer({file: @results.last[:link], width: "500px", height:"70px", autoPlay: "true"}) %>
 
 <p class="results-count"><%= @results.count %> Results found for <%= params[:raga] %></p>
 <table class="results">
@@ -13,7 +16,7 @@
   </thead>
   <tbody>
     <% for result in @results %>
-      <tr>
+      <tr class="playable" data-file="<%= result[:link] %>">
         <td><%= result[:track] %></td>
         <td><%= result[:album] %></td>
         <td><a href='<%= result[:link] %>'>Download</a></td>
@@ -22,8 +25,11 @@
   </tbody>
 </table>
 
+
 <% content_for :javascript_ready do %>
   $("#raga-input").autocomplete({
     source: <%= (@ragas["melakartas"] + @ragas["janyas"]).to_json.html_safe %>
   });
+  window.player = jwplayer()
+  setupPlayer();
 <% end %>

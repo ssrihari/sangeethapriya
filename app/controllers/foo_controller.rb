@@ -1,6 +1,6 @@
 class FooController < ApplicationController
   def search
-    raga = params[:raga] || 'kalyani'
+    raga = params[:raga] || 'tmk'
     searcher = SangeethapriyaSearcher.new("http://www.sangeethapriya.org/fs_search.php", raga)
     @results = searcher.results
     @ragas = YAML.load_file('config/raga.yml')

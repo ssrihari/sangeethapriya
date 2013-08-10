@@ -22,6 +22,7 @@ end
 
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
+gem 'jwplayer-rails'
 gem 'nokogiri'
 gem 'httparty'
 
