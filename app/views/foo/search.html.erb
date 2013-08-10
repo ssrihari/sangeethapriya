@@ -1,0 +1,20 @@
+<form class="search-form" method="post" action="/search">
+  <label for="raga">Raga:</label> <input type="text" name="raga" />
+</form>
+
+<p class="results-count"><%= @results.count %> Results found for <%= params[:raga] %></p>
+<table class="results">
+  <thead>
+    <th>Track</th>
+    <th>Album</th>
+    <th>Link</th>
+  </thead>
+  <tbody>
+    <% for result in @results %>
+      <tr>
+        <td><%= result[:track] %></td>
+        <td><%= result[:album] %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

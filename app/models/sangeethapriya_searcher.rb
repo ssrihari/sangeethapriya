@@ -1,6 +1,3 @@
-require 'nokogiri'
-require 'httparty'
-
 class SangeethapriyaSearcher
   include HTTParty
 
