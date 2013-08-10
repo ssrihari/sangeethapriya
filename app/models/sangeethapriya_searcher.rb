@@ -25,9 +25,14 @@ class SangeethapriyaSearcher
     result.css("a").text
   end
 
+  def get_hostname(link)
+    return "www.sangeethapriya.org" if link.include?("sangeethapriya.org")
+    return "www.sangeethamshare.org" if link.include?("sangeethamshare.org")
+  end
+
   def link(result)
     folder_link = result.css("a").attr("href").value()
-    hostname = "www.sangeethapriya.org"
+    hostname = get_hostname(folder_link)
     folder_link.gsub!("http://#{hostname}/","")
     filename = track(result).gsub(/mp3.+/, "mp3")
     action = "http://#{hostname}/fstream.php\?"
