@@ -1,29 +1,38 @@
 <%= jwplayer_assets %>
+
+<div class="player-container">
+  <%= jwplayer({file: @results.last[:link], width: "400px", height:"70px", margin: "0 auto"}) %>
+</div>
+
+<div class="now-playing-info">
+  <p class="now-playing-heading">Now Playing:</p>
+  <p class="now-playing-title"></p>
+</div>
+
 <form class="search-form" method="post" action="/search">
-  <label for="raga">Raga:</label>
   <input type="text" id="raga-input" name="raga" />
-  <%= submit_tag %>
+  <%= submit_tag "Search" %>
 </form>
 
-<%= jwplayer({file: @results.last[:link], width: "500px", height:"70px", autoPlay: "true"}) %>
-
 <p class="results-count"><%= @results.count %> Results found for <%= params[:raga] %></p>
-<table class="results">
-  <thead>
-    <th>Track</th>
-    <th>Album</th>
-    <th>Link</th>
-  </thead>
-  <tbody>
-    <% for result in @results %>
-      <tr class="playable" data-file="<%= result[:link] %>">
-        <td><%= result[:track] %></td>
-        <td><%= result[:album] %></td>
-        <td><a href='<%= result[:link] %>'>Download</a></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="results-container">
+  <table class="results">
+    <thead>
+      <th>Track</th>
+      <th>Album</th>
+      <th>Link</th>
+    </thead>
+    <tbody>
+      <% for result in @results %>
+        <tr class="playable" data-file="<%= result[:link] %>" data-track="<%= result[:track] %>">
+          <td><%= result[:track] %></td>
+          <td><%= result[:album] %></td>
+          <td><a href='<%= result[:link] %>'>Download</a></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 
 
 <% content_for :javascript_ready do %>

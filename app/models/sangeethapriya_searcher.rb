@@ -22,7 +22,7 @@ class SangeethapriyaSearcher
   end
 
   def track(result)
-    result.text
+    result.text.gsub(/mp3.+/, "mp3")
   end
 
   def album(result)
@@ -39,7 +39,7 @@ class SangeethapriyaSearcher
     host = hostname(result)
     folder_link = result.css("a").attr("href").value()
     folder_link.gsub!("http://#{host}/","")
-    filename = track(result).gsub(/mp3.+/, "mp3")
+    filename = track(result)
     action = "http://#{host}/fstream.php\?"
     prefix = "file\=/data/#{host}/public_html/"
     "#{action}#{prefix}#{folder_link}/#{filename}"
