@@ -1,22 +1,11 @@
-<%= jwplayer_assets %>
-
-<div class="player-container">
-  <%= jwplayer({file: @results.last[:link], width: "400px", height:"70px", margin: "0 auto"}) %>
-</div>
-
-<div class="now-playing-info">
-  <p class="now-playing-heading">Now Playing:</p>
-  <p class="now-playing-title"></p>
-</div>
-
 <form class="search-form" method="post" action="/search">
   <input type="text" id="raga-input" name="raga" />
   <%= submit_tag "Search" %>
 </form>
 
-<p class="results-count"><%= @results.count %> Results found for <%= params[:raga] %></p>
 <div class="results-container">
-  <table class="results">
+  <p class="results-count"><%= @results.count %> Results found for <%= params[:raga] %></p>
+  <table class="results-table">
     <thead>
       <th>Track</th>
       <th>Album</th>
@@ -34,11 +23,20 @@
   </table>
 </div>
 
+<div class="ribbon">
+  <div class="player-container">
+    <p class="now-playing-title"></p>
+    <audio src="" type="audio/mp3" autoplay controls align="left"/>
+      <p>Your browser does not support the audio element.</p>
+    </audio>
+  </div>
+</div>
 
 <% content_for :javascript_ready do %>
   $("#raga-input").autocomplete({
     source: <%= (@ragas["melakartas"] + @ragas["janyas"]).to_json.html_safe %>
   });
-  window.player = jwplayer()
+
+  window.player = $("audio")[0]
   setupPlayer();
 <% end %>

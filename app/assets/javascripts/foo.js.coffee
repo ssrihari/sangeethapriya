@@ -1,15 +1,14 @@
 setupPlayer = ->
-  $("#jwplayer").css("margin", "0 auto")
-  $(".playable").click loadFile
+  playables = $(".playable")
+  playables.click (event) -> playNow($(event.currentTarget))
+  playNow(playables.last())
 
-loadFile = (event) ->
-  playable = $(event.currentTarget)
+playNow = (playable) ->
   file = playable.data("file")
-  player.load({file:file, autoPlay: true})
-  updateNowPlaying(playable.data("track"))
-  player.play()
+  player.src = file
+  updateNowPlaying(playable)
 
-updateNowPlaying = (track) ->
-  $(".now-playing-title").text(track)
+updateNowPlaying = (playable) ->
+  $(".now-playing-title").text(playable.data("track"))
 
 window.setupPlayer = setupPlayer
