@@ -1,5 +1,5 @@
 $std-width: 800px;
-$ribbon-height: 50px;
+$ribbon-height: 75px;
 $search-height: 30px;
 
 .ribbon {
@@ -7,7 +7,7 @@ $search-height: 30px;
   bottom:0;
   left: 0;
   width: 100%;
-  min-height: $ribbon-height;
+  height: $ribbon-height;
   background-color: black;
   text-align: center;
 }
@@ -50,7 +50,7 @@ audio {
 
 .results-container {
   min-width: 800px;
-  margin: $search-height auto 0;
+  margin: $search-height + 20px auto $ribbon-height + 5px;
   padding: 0 50px;
   text-align: center;
 }
@@ -62,5 +62,15 @@ audio {
 }
 
 .playable {
-
+  font-size: 15px;
+  color: black;
+  background-color: lightgray;
+  &:hover, &.active {
+    background-color: pink;
+    cursor: pointer;
+  }
+  &.active {
+    color: white;
+    background-color: red;
+  }
 }

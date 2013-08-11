@@ -1,10 +1,10 @@
 <form class="search-form" method="post" action="/search">
-  <input type="text" id="raga-input" name="raga" />
+  <input type="text" id="raga-input" name="query" />
   <%= submit_tag "Search" %>
 </form>
 
 <div class="results-container">
-  <p class="results-count"><%= @results.count %> Results found for <%= params[:raga] %></p>
+  <p class="results-count"><%= @results.count %> Results found for <%= params[:query] %></p>
   <table class="results-table">
     <thead>
       <th>Track</th>
@@ -38,5 +38,6 @@
   });
 
   window.player = $("audio")[0]
+  window.playables = $(".playable")
   setupPlayer();
 <% end %>

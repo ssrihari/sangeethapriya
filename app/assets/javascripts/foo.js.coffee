@@ -1,12 +1,17 @@
 setupPlayer = ->
-  playables = $(".playable")
   playables.click (event) -> playNow($(event.currentTarget))
-  playNow(playables.last())
+  playNow(playables.first())
 
 playNow = (playable) ->
   file = playable.data("file")
   player.src = file
   updateNowPlaying(playable)
+  markActive(playable)
+
+markActive = (playable) ->
+  playables.removeClass("active")
+  playable.addClass("active")
+
 
 updateNowPlaying = (playable) ->
   $(".now-playing-title").text(playable.data("track"))

@@ -1,7 +1,7 @@
 class FooController < ApplicationController
   def search
-    raga = params[:raga] || 'tmk'
-    searcher = SangeethapriyaSearcher.new("http://www.sangeethapriya.org/fs_search.php", raga)
+    params[:query] = 'tmk' unless params[:query].present?
+    searcher = SangeethapriyaSearcher.new("http://www.sangeethapriya.org/fs_search.php", params[:query])
     @results = searcher.only_sangeethapriya_results
     @ragas = YAML.load_file('config/raga.yml')
   end
