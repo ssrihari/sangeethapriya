@@ -6,8 +6,8 @@ setupPlayer = ->
 
 playNext = ->
   console.log "in playNext"
-  window.currentIndex = currentIndex + 1
-  playNow($(playables[currentIndex]))
+  window.currentIndex = window.currentIndex + 1
+  playNow($(playables[window.currentIndex]))
 
 playNow = (playable) ->
   file = playable.data("file")
